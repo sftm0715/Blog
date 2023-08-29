@@ -31,7 +31,7 @@ class BlogApiControllerTest {
     @Autowired // MockMvc : 어플을 서버에 배포하지않고, 테스트용 MVC 환경을 만들어 요청/전송/응답 기능을 지원.
     protected MockMvc mockMvc;
 
-    @Autowired // 직렬화(자바객체→JSON)/역직렬화(JSON→자바객체)를 위한 클래스.
+    @Autowired // 직렬화(자바객체→JSON) / 역직렬화(JSON→자바객체)를 위한 클래스.
     protected ObjectMapper objectMapper;
 
     @Autowired
