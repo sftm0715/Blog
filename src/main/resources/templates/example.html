@@ -1,31 +1,30 @@
-<!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
-<head>
+<!DOCTYPE html> <!--html 문서의 타입을 정의하는 선언부-->
+<html xmlns:th="http://thymeleaf.org"> <!--타임리프 네임스페이스 선언 : 타임리프 템플릿 문법 사용 가능-->
+<head> <!--html문서의 헤드 부분 정의-->
     <meta charset="UTF-8">
     <title>Title</title>
-</head>
-<body>
-
-<h1>타임리프 익히기</h1>
+</head> <!--html문서의 헤드 끝 정의-->
+<body> <!--html 문서의 본문 정의-->
+<h1>타임리프 익히기</h1> <!--h1 : 큰 제목-->
 
 <!-- LocalDate를 yyyy-MM-dd 포맷으로 변경 -->
-<p th:text="${#temporals.format(today, 'yyyy-MM-dd')}"></p>
+<p th:text="${#temporals.format(today, 'yyyy-MM-dd')}"></p> <!--p(Paragraph) : 문장/문단-->
 
 <!-- person을 선택한 객체로 지정 -->
-<div th:object="${person}">
+<div th:object="${person}"> <!--<div>: "Division"의 줄임말로, 구역을 나누는 데 사용되는 HTML 요소-->
     <p th:text="|이름 : *{name}"></p>
     <p th:text="|나이 : *{age}"></p>
     <p>취미</p>
 
     <!-- hobbies 개수만큼 반복-->
-    <ul th:each="hobby : *{hobbies}">
-        <li th:text="${hobby}"></li>
+    <ul th:each="hobby : *{hobbies}"> <!--<ul>: "Unordered List"의 줄임말로, 순서가 없는 목록을 나타내는 HTML 요소-->
+        <li th:text="${hobby}"></li>  <!--<li>: "List Item"의 줄임말로, 목록에서 각 항목을 나타내는 HTML 요소-->
         <!-- 반복 대상이 운동이라면 '대표 취미'라는 표시 추가 -->
-        <span th:if="${hobby == '운동'}">(대표 취미)</span>
+        <span th:if="${hobby == '운동'}">(대표 취미)</span> <!--<span>: 특정 부분을 감싸 특별한 스타일이나 동작을 적용하기 위해 사용되는 HTML 요소-->
     </ul>
 </div>
 
 <!-- 1번 블로그 글을 보러 이동 -->
-<a th:href="@{/api/articles/{id}(id=${person.id})}">글 보기</a>
+<a th:href="@{/api/articles/{id}(id=${person.id})}">글 보기</a> <!--<a>: "Anchor"의 줄임말로, 하이퍼링크를 생성하는 HTML 요소-->
 </body>
 </html>>
