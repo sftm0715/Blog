@@ -14,17 +14,17 @@ import java.util.List;
 public class ExampleController {
 
     @GetMapping("/thymeleaf/example")
-    public String thymeleafExample(Model model) {
+    public String thymeleafExample(Model model) {  // Model : 뷰(html)로 데이터를 넘겨주는 객체.
         Person person1 = new Person();
         person1.setId(1L);
         person1.setName("홍길동");
         person1.setAge(11);
         person1.setHobbies(List.of("운동", "독서"));
 
-        model.addAttribute("person", person1);
-        model.addAttribute("today", LocalDate.now());
+        model.addAttribute("person", person1);          // addAttribute() : model에 값 저장 - person(키)에 사람 정보 저장
+        model.addAttribute("today", LocalDate.now());   //                : model에 값 저장 - today(키)에 날짜 정보 저장
 
-        return "example";
+        return "example";   // example(뷰 이름) 반환 : 반환하는 값의 이름을 가진 뷰 파일을 찾아라 → example.html 뷰 조회
     }
 
     @Data

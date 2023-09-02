@@ -42,7 +42,7 @@ public class BlogApiController {
     }
 
     // 글 조회 핸들러 메서드
-    @GetMapping("api/articles/{id}")
+    @GetMapping("/api/articles/{id}")
     public ResponseEntity<ArticleResponse> findArticle (@PathVariable long id) {
         Article article = blogService.findById(id);
 
@@ -51,7 +51,7 @@ public class BlogApiController {
     }
 
     // 글 삭제 핸들러 메서드
-    @DeleteMapping("api/articles/{id}")
+    @DeleteMapping("/api/articles/{id}")
     public ResponseEntity<Void> deleteArticle (@PathVariable long id) {
         blogService.delete(id);
 
