@@ -36,41 +36,43 @@ public class User implements UserDetails { // UserDetails 를 상속 방아 인�
     }
 
 
-    @Override // 권환 반환
+    @Override // 권환 반환 : 사용자가 가진 권한 목록 반환
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("user"));
     }
 
-    @Override // 사용자의 id 반환 (고유값) :
+    @Override // 사용자의 id 반환 (고유값) : 사용자를 식별가능한 고유값 반환.
     public String getUsername() {
         return email;
     }
 
-    @Override // 사용자 패스워드 반환
+    @Override // 사용자 패스워드 반환 : 패스워드는 암호화 되어야함.
     public String getPassword() {
         return password;
     }
 
-    @Override // 계정 만료 여부 반환
+    @Override // 계정 만료 여부 반환 : 만료O-false / 만료X - true 반환
     public boolean isAccountNonExpired() {
         // 만료됐는지 확인하는 로직
+        return true; // true : 만료 X
+    }
+
+    @Override // 계정 잠금 여부 반환 : 잠금O-false / 잠금X - true 반환
+    public boolean isAccountNonLocked() {
+        // 계정 잠금됐는지 확인하는 로직
         return true; // true : 잠금 X
     }
 
-    @Override // 계정 잠금 여부 반환
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override // 패스워드 만료 여부 반환
+    @Override // 패스워드 만료 여부 반환 : 만료O-false / 만료X - true 반환
     public boolean isCredentialsNonExpired() {
+        // 패스워드가 만료됐는지 확인하는 로직
         return true;
     }
 
-    @Override // 계정 사용 가능 여부 반환
+    @Override // 계정 사용 가능 여부 반환 : 사용불가능-false / 사용가능 - true 반환
     public boolean isEnabled() {
         // 계정이 사용 가능한지 확인하는 로직
-        return true;
+        return true; // true : 사용가능
     }
 
 }
