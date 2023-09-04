@@ -14,10 +14,14 @@ public class UserDetailService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
+
+    /* 필수 오버라이드 메서드 1개 */
+
     // 사용자 이름(email)으로 사용자의 정보를 가져오는 메서드
     @Override
     public User loadUserByUsername(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException((email)));
     }
+
 }

@@ -16,7 +16,8 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class User implements UserDetails { // UserDetails 를 상속 방아 인증 객체로 사용
+// UserDetails : 사용자 인증정보를 담아두는 인터페이스
+public class User implements UserDetails { // UserDetails 를 상속 받아 인증 객체로 사용
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -35,8 +36,9 @@ public class User implements UserDetails { // UserDetails 를 상속 방아 인�
         this.password = password;
     }
 
+    /* 필수 오버라이드 메서드 8개 */
 
-    @Override // 권환 반환 : 사용자가 가진 권한 목록 반환
+    @Override // 권환 반환 : 사용자가 가진 권한 목록 반환 (여기선 user 밖에 없으므로 user 만 반환)
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("user"));
     }
