@@ -36,19 +36,19 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeRequests()  /*1) 인증/인가 설정*/
+                .authorizeRequests()  /* 1) 인증/인가 설정 */
                 .requestMatchers("/login", "/signup", "/user").permitAll() // permitAll() : [누구나 접근 가능] → "/login", "/signup", "/user" 로 요청이 오면 인증/인가없이 누구나 접근 가능
                 .anyRequest().authenticated() // anyRequest() : 위 설정 url 이외 요청
                 .and()                        // authenticated() : 인증 후 접근 가능 (인가는 필요없음)
-                .formLogin()  /*2) 폼 기반 로그인 설정*/
+                .formLogin()  /* 2) 폼 기반 로그인 설정 */
                 .loginPage("/login") // 로그인 페이지 경로
                 .defaultSuccessUrl("/articles") // 로그인 완료시 이동 경로
                 .and()
-                .logout()  /*3) 로그아웃 설정*/
+                .logout()  /* 3) 로그아웃 설정 */
                 .logoutSuccessUrl("/login") // 로그아웃 완료시 이동 경로
                 .invalidateHttpSession(true) // 로그아웃 후, 세션 전체 삭제 여부
                 .and()
-                .csrf().disable()  /*4) csrf 비활성화*/
+                .csrf().disable()  /* 4) csrf 비활성화 */
                 .build();
     }
 
@@ -72,6 +72,6 @@ public class WebSecurityConfig {
         // : 비밀번호 인코더를 빈으로 등록
         @Bean
         public BCryptPasswordEncoder bCryptPasswordEncoder() {
-            return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();
         }
 }
