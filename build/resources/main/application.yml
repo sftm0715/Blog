@@ -5,16 +5,17 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
     # 테이블 생성 후에 data.sql 실행
     defer-datasource-initialization: true
-
   # DB 정보 추가
   datasource:
    url: jdbc:h2:mem:testdb
    username : sa
-
   # H2 콘솔 활성화
   h2:
    console:
      enabled: true
+#토큰 제공자 추가
+jwt:
+  issuer: sftm0715@gmail.com
+  secret_key: study-springboot
