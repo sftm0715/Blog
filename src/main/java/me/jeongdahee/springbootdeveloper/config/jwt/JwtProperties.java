@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Setter
 @Getter
 @Component
-@ConfigurationProperties("jwt") // 자바 클래스에 프로퍼티값을 가져와서 사용하는 애너테이션
+@ConfigurationProperties("jwt") // 자바 클래스에 jwt 프로퍼티(속성)값을 가져와서 사용하는 애너테이션
 public class JwtProperties {
     private String issuer;
     private String secretKey;
