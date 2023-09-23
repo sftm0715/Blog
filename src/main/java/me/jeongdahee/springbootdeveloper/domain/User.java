@@ -30,10 +30,21 @@ public class User implements UserDetails { // UserDetails 를 상속 받아 인�
     @Column(name = "password")
     private String password;
 
+    @Column(name = "nickname", unique = true)
+    private String nickname;
+
     @Builder
-    public User(String email, String password, String auth) {
+    public User(String email, String password, String nickname) {
         this.email = email;
         this.password = password;
+        this.nickname = nickname;
+    }
+
+    /* 사용자이름(nickname) 변경 메서드 */
+    public User update(String nickname) {
+        this.nickname = nickname;
+
+        return this;
     }
 
     /* 필수 오버라이드 메서드 8개 */
