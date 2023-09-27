@@ -10,7 +10,7 @@ public class UserViewController {
 
     @GetMapping("/login")
     public String login() { // "/login" 경로 접근 시,
-        return "login";     // login.html 반환.
+        return "oauthLogin";     // login.html 반환.
     }
 
     @GetMapping("/signup")
