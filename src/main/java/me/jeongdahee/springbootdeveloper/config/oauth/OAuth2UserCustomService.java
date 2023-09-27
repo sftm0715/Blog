@@ -18,18 +18,19 @@ public class OAuth2UserCustomService extends DefaultOAuth2UserService {
     private final UserRepository userRepository;
 
     /* loadUser() */
-    // : OAuth에서 제공하는 정보를 기반으로 유저 객체를 만들어주는 메서드
+    // : 리소스 서버에서 보내주는 사용자 정보를 기반으로 사용자 조회, (정보가있다면)이름 업데이트, (없다면)saveOrUpdate() 를 실행해 테이블에 회원데이터 추가.
     // - DefaultOAuth2UserService(부모클래스)에서 제공하는 메서드
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+
         // 요청을 바탕으로 유저 정보를 담은 객체 반환
         OAuth2User user = super.loadUser(userRequest);
         saveOrUpdate(user);
-        return user;
+        return user; // 사용자 객체 반환 : 식별자, 이름, 이메일, 프사링크 등 정보를 담고있음
     }
 
     /* 유저가 있으면 → 업데이트
-     유저가 없으면 → 유저 생성 하는 메서드 */
+     유저가 없으면 → 유저 생성해서 DB에 저장하는 메서드 */
     private User saveOrUpdate(OAuth2User oAuth2User) {
         Map<String, Object> attributes = oAuth2User.getAttributes();
         String email = (String) attributes.get("email");
