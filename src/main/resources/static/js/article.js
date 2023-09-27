@@ -1,7 +1,4 @@
-/* 자바스크립트로 버튼(삭제/수정) API 구현*/
-
-// [ 삭제 기능 ]
-// : HTML에서 id가 'delete-btn'로 설정된 요소를 찾아, 그 요소에서 클릭이벤트가 발생하면 fetch()로 삭제 API 요청 보냄.
+// 삭제 기능
 const deleteButton = document.getElementById('delete-btn');
 
 if (deleteButton) {
@@ -21,11 +18,9 @@ if (deleteButton) {
     });
 }
 
-// [ 수정 기능 ]
-// id가 'modify-btn' 인 요소(Element) 조회
-const modifyButton= document.getElementById('modify-btn');
+// 수정 기능
+const modifyButton = document.getElementById('modify-btn');
 
-// 클릭 이벤트가 감지되면 수정 API 요청.
 if (modifyButton) {
     modifyButton.addEventListener('click', event => {
         let params = new URLSearchParams(location.search);
@@ -50,10 +45,8 @@ if (modifyButton) {
     });
 }
 
-
-// [ 생성 기능 ]
-// id가 'create-btn' 인 요소(Element) 조회
-const createButton= document.getElementById('create-btn');
+// 생성 기능
+const createButton = document.getElementById('create-btn');
 
 if (createButton) {
     // 등록 버튼을 클릭하면 /api/articles로 요청을 보낸다

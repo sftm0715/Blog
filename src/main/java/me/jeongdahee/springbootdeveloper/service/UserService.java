@@ -26,23 +26,19 @@ public class UserService {
 //                .password(bCryptPasswordEncoder.encode(dto.getPassword()))
 //                .build()).getId();
 
-    /**/
     public Long save(AddUserRequest dto) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        return userRepository.save(
-                User.builder()
-                        .email(dto.getEmail())
-                        // BCryptPasswordEncoder 생성자를 사용해 직접 생성해서 패스워드를 암호화할 수 있게 코드 수정
-                        .password(encoder.encode(dto.getPassword()))
-                        .build())
-                .getId();
+        return userRepository.save(User.builder()
+                .email(dto.getEmail())
+                .password(encoder.encode(dto.getPassword()))
+                .build()).getId();
     }
 
     /* 유저 ID로 유저를 찾는 메서드 */
     public User findById(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() ->new IllegalArgumentException("Unexpected user"));
+                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
     }
 
     /* 이메일로 유저를 찾는 메서드 */

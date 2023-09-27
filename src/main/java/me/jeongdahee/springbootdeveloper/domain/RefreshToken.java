@@ -15,10 +15,10 @@ public class RefreshToken {
     @Column(name = "id", updatable = false)
     private Long id;
 
-    @Column(name = "user_id", nullable = false, updatable = true)
+    @Column(name = "user_id", nullable = false, unique = true)
     private Long userId;
 
-    @Column(name = "refresh_Token", nullable = false)
+    @Column(name = "refresh_token", nullable = false)
     private String refreshToken;
 
 
@@ -29,8 +29,9 @@ public class RefreshToken {
     }
 
     /* 토큰 업데이트 */
-    public RefreshToken update(String refreshToken) {
-        this.refreshToken = refreshToken;
+    public RefreshToken update(String newRefreshToken) {
+        this.refreshToken = newRefreshToken;
+
         return this;
     }
 }

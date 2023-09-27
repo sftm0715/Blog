@@ -1,10 +1,10 @@
 package me.jeongdahee.springbootdeveloper.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 
 @AllArgsConstructor
-@Data
+@Getter
 public class CreateAccessTokenResponse {
     private String accessToken;
 }

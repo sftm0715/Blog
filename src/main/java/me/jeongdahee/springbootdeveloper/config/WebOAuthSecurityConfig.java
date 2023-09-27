@@ -47,7 +47,9 @@ public class WebOAuthSecurityConfig {
         // : 토큰 방식으로 인증을 하기때문에 기존에 있던 '폼로그인/세션' 비활성화
         http.csrf().disable() // http 객체를 통해 CSRF(Cross-Site Request Forgery) 보안을 비활성화 (CSRF 보안은 웹 애플리케이션의 요청 위조 공격을 방지하기 위한 보안 메커니즘 중 하나)
                 .httpBasic().disable()
+                .formLogin().disable()
                 .logout().disable();
+
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
@@ -57,7 +59,7 @@ public class WebOAuthSecurityConfig {
 
         // 3. authorizeRequests()
         // : 토큰 재발급 URL은 인증없이 접근 가능 설정 (나머지 API URL은 인증 필요)
-        http.authorizeHttpRequests() // http.authorizeHttpRequests(): HTTP 요청에 대한 보안 규칙을 구성하는 메서드 호출
+        http.authorizeRequests() // http.authorizeHttpRequests(): HTTP 요청에 대한 보안 규칙을 구성하는 메서드 호출
                 .requestMatchers("/api/token").permitAll() // permitAll() : 모든 사용자에 대한 접근을 허용 (인증 없이 접근 가능)
                 .requestMatchers("/api/**").authenticated() // authenticated() : 인증된 사용자에 대한 접근을 허용 ("/api/**" 패턴에 일치하는 모든 요청은 인증된 사용자만 접근가능)
                 .anyRequest().permitAll(); // "/api/token"과 "/api/"로 시작하지 않는 모든 요청은 모든 사용자에 대해 접근이 허용
@@ -97,7 +99,8 @@ public class WebOAuthSecurityConfig {
         return new OAuth2SuccessHandler(tokenProvider,
                 refreshTokenRepository,
                 oAuth2AuthorizationRequestBasedOnCookieRepository(),
-                userService);
+                userService
+        );
     }
 
     // TokenAuthenticationFilter 를 반환하는 빈 메소드로, 사용자 정의 토큰 인증 필터를 생성
@@ -117,7 +120,6 @@ public class WebOAuthSecurityConfig {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }
 
 

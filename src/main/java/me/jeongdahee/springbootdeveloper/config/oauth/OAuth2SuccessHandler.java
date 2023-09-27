@@ -61,7 +61,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         // : 토큰제공자로 액세스 토큰을 만든 뒤, 쿠키에서 리다이렉트 경로가 담긴 값을 가져와
         // 쿼리 파라미터에 액세스 토큰 추가.
         String accessToken = tokenProvider.generateToken(user, ACCESS_TOKEN_DURATION);
-        String targetUrl = getTargetUrl(accessToken);
+        String targetUrl = getTargetUrl(accessToken);;
 
         // 3. 인증 관련 설정값/쿠키 제거
         // : 인증 프로세스를 진행하며, 세션/쿠키에 임시 저장 인증 관련 데이터 제거
@@ -77,6 +77,8 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         RefreshToken refreshToken = refreshTokenRepository.findByUserId(userId)
                 .map(entity -> entity.update(newRefreshToken)) // 리프레시 토큰이 존재하는 경우, 해당 엔티티의 update 메서드를 호출하여 새로운 리프레시 토큰(newRefreshToken)을 업데이트
                 .orElse(new RefreshToken(userId, newRefreshToken));
+
+        refreshTokenRepository.save(refreshToken);
     }
 
     /*생성된 리프레시 토큰을 쿠키에 저장*/
@@ -84,6 +86,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
                                          HttpServletResponse response,
                                          String refreshToken) {
         int cookieMaxAge = (int) REFRESH_TOKEN_DURATION.toSeconds();
+
         CookieUtil.deleteCookie(request, response, REFRESH_TOKEN_COOKIE_NAME);
         CookieUtil.addCookie(response, REFRESH_TOKEN_COOKIE_NAME, refreshToken, cookieMaxAge);
     }
