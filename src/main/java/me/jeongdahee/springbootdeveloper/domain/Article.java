@@ -28,16 +28,23 @@ public class Article {
     @Column(name = "content", nullable = false)
     private String content;
 
+    // 글에 글쓴이 추가
+    @Column(name = "author", nullable = false)
+    private String author;
+
     @Builder // 빌더 패턴으로 객체 생성
-    public Article(String title, String content) {
+    public Article(String title, String content, String author) {
         this.title = title;
         this.content = content;
+        this.author = author;
     }
 
+    // 글 업데이트 생성자
     public void update(String title, String content) {
         this.title = title;
         this.content = content;
     }
+
 
     @CreatedDate
     @Column(name = "created_at")
