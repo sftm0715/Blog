@@ -15,4 +15,6 @@
 3. Spring Security
 4. JWT
 5. H2
+6. AWS Elastic Beanstalk
+7. GitHub Actions
  ```
